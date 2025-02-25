@@ -15,7 +15,7 @@ def sift(img1, img2):
                            `points[0]` are keypoints in img1 and the corresponding
                             keypoints in img2 are `points[1]`
     """
-    sift = cv2.xfeatures2d.SIFT_create()
+    sift = cv2.SIFT_create()
 
     kp1, des1 = sift.detectAndCompute(img1, None)
     kp2, des2 = sift.detectAndCompute(img2, None)
