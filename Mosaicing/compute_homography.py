@@ -45,5 +45,5 @@ def compute_homography(img1, img2, eps):
         # termination : if the consensus set is large enough i.e. |C| > 0.8*|M|, C-> Consensus set, M-> Correspondence set
         if len(consensus_idx) > 0.8*n:
             break
-
+    # a change could be made here by including all the consensus of the best fit to find the homography matrix
     return H
