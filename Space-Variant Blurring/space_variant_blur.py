@@ -68,6 +68,14 @@ B = (N**2)/(2*np.log(100*A))
 
 sigma_map = lambda x,y : A*np.exp(-((x-N/2)**2 + (y-N/2)**2)/B)
 
+# plot sigma map
+sigma_img = np.zeros_like(img1)
+for i in range(N):
+    for j in range(N):
+        sigma_img[i, j] = sigma_map(i, j)
+
+plt.imsave("Sigma_plot.png", sigma_img, cmap='gray')
+
 img1_blurred = space_variant_blur(img1, sigma_map)
 plt.imsave('Globe_blurred.png', img1_blurred, cmap='gray')
 
