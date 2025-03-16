@@ -6,17 +6,22 @@ from compute_homography import compute_homography
 from perspective_wrap import perspective_transfrom
 
 # importing the three images
-img1 = cv.imread('img1.jpeg',cv.IMREAD_GRAYSCALE)
-img2 = cv.imread('img2.jpeg',cv.IMREAD_GRAYSCALE)
-img3 = cv.imread('img3.jpeg',cv.IMREAD_GRAYSCALE)
+stride = 2
+img1 = cv.imread('myimg1.jpeg',cv.IMREAD_GRAYSCALE)
+img1 = img1[::stride,::stride]
+img2 = cv.imread('myimg2.jpeg',cv.IMREAD_GRAYSCALE)
+img2 = img2[::stride,::stride]
+img3 = cv.imread('myimg3.jpeg',cv.IMREAD_GRAYSCALE)
+img3 = img3[::stride,::stride]
+
 h1, w1 = img1.shape
 h2, w2 = img2.shape
 h3, w3 = img3.shape
 
 # computing the homography matrices
-eps = 1
+eps = 5
 H21 = compute_homography(img2, img1, eps)
-H23 = compute_homography(img2, img3, eps
+H23 = compute_homography(img2, img3, eps)
 
 # calculating the bounds of the canvas in img2 coordinate system
 corners1 = np.array([[0, 0, 1],
@@ -54,7 +59,6 @@ height = max_x - min_x + 1
 width = max_y - min_y + 1
 
 C = np.zeros((height, width))
-print(height, width)
 
 weight1 = np.zeros((height, width), dtype=np.float32)
 weight2 = np.zeros((height, width), dtype=np.float32)
@@ -115,7 +119,4 @@ tot_weight = weight1 + weight2 + weight3
 valid_idx = tot_weight > 0
 C[valid_idx] /= tot_weight[valid_idx]
 
-plt.imshow(C, 'gray')
-plt.show()
-
-plt.imsave('assign_out.png', C, cmap='gray')
+plt.imsave('my_out.png', C, cmap='gray')
