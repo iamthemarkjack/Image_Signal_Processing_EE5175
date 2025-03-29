@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from gauss_blur import blur_kernel
 
 # function to convolve
-def convole(I, kernel):
+def convolve(I, kernel):
     """
     Both I and kernel are numpy darrays
     """
@@ -27,5 +27,5 @@ img = plt.imread('Mandrill.png')
 sigmas = [1.6, 1.2, 1.0, 0.6, 0.3, 0.0]
 for sigma in sigmas:
     kernel = blur_kernel(sigma)
-    out = convole(img, kernel)
+    out = convolve(img, kernel)
     plt.imsave(f'sigma{sigma}.png', out, cmap='gray')
